@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ room.title }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="image-slider">
+                {% for image in room.images.all %}
+                    <div class="slide">
+                        <img src="{{ image.image.url }}" alt="Room Image" class="room-image">
+                    </div>
+                {% endfor %}
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+            <h1>{{ room.title }}</h1>
+            <p>{{ room.description }}</p>
+            <p>Location: {{ room.location.name }}</p>
+            <p>Category: {{ room.category.name }}</p>
+            <p>Price per month: ${{ room.price_per_month }}</p>
+            <p>Availability: {% if room.availability %}Available{% else %}Not Available{% endif %}</p>
+        </div>
+        <div class="col-md-4">
+            {% if user.is_staff %}
+                <div class="btn-group-vertical mt-3">
+                    <a href="{% url 'room_edit' room.pk %}" class="btn btn-primary btn-sm btn-block mb-2">Edit Room</a>
+                    <a href="{% url 'delete_room' room.pk %}" class="btn btn-danger btn-sm btn-block">Delete Room</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slide");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "block";
+    }
+</script>
+
+<style>
+    .room-image {
+        width: 100%;
+        height: auto;
+        max-height: 400px;
+        object-fit: cover;
+    }
+
+    .btn-danger {
+        background-color: red !important;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 12px;
+    }
+
+    .btn-danger:hover {
+        background-color: darkred !important;
+    }
+
+    .image-slider {
+        position: relative;
+        max-width: 100%;
+        margin-bottom: 20px;
+        overflow: hidden;
+    }
+
+    .slide {
+        display: none;
+        text-align: center;
+    }
+
+    .prev, .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+    }
+
+    .next {
+        right: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+        background-color: rgba(0,0,0,0.8);
+    }
+
+    @media only screen and (max-width: 768px) {
+        .room-image {
+            height: 250px;
+        }
+        .prev, .next {
+            font-size: 14px;
+            padding: 12px;
+        }
+    }
+</style>
+
+{% endblock %}

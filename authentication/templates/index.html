@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+<button type="submit">Logout</button>
+    <h2>Hello Developer</h2>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+
+    </form>
+</body>
+</html>

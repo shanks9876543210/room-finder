@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5; /* Light background */
+            text-align: center;
+            padding: 50px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Registration Successful</h2>
+    <p>Your registration was successful! You can now <a href="{% url 'login' %}">login</a>.</p>
+</body>
+</html>

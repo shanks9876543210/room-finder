@@ -1,0 +1,35 @@
+<!-- locations_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locations List</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #343a40; /* Dark background color */
+            color: #ffffff; /* White text color */
+        }
+        .container {
+            padding-top: 20px;
+        }
+        .list-group-item {
+            background-color: #343a40; /* Dark background color for list items */
+            border-color: #454d55; /* Darker border color for list items */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Locations</h1>
+    <ul class="list-group">
+        {% for location in locations %}
+            <li class="list-group-item">{{ location.name }}</li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

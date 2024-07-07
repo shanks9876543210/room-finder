@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rooms by Category</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Rooms in Category: {{ category.name }}</h1>
+        <ul>
+            {% for room in rooms %}
+            <li>
+                <h2><a href="{% url 'room_detail' room.pk %}">{{ room.title }}</a></h2>
+                <p>{{ room.description }}</p>
+                <p>Location: {{ room.location.name }}</p>
+                <p>Price per month: ${{ room.price_per_month }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

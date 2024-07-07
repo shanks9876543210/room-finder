@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Room{% endblock %}
+
+{% block content %}
+<div class="container mt-5 data-entry-container">
+  <h1 class="mb-4">Add Room</h1>
+  <form method="post" enctype="multipart/form-data" class="add-room-form">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_title">Title:</label>
+      
+      {{ form.title }}
+    </div>
+    <div class="form-group">
+      <label for="id_location">Location:</label>
+      
+      {{ form.location }}
+    </div>
+    <div class="form-group">
+      <label for="id_category">Category:</label>
+      
+      {{ form.category }}
+    </div>
+    <div class="form-group">
+      <label for="id_price_per_month">Price per Month:</label>
+      
+      {{ form.price_per_month }}
+    </div>
+    <div class="form-group">
+      <label for="id_availability">Availability:</label>
+      
+      {{ form.availability }}
+    </div>
+    <div class="form-group">
+      <label for="id_description">Description:</label>
+      
+      {{ form.description }}
+    </div>
+    <div id="file-inputs-container" class="form-group">
+      <label for="id_images">Room Images:</label>
+      <br>
+      <div class="custom-file">
+        <input
+          type="file"
+          name="images"
+          class="custom-file-input"
+          id="id_images"
+          multiple
+        />
+        <label class="custom-file-label" for="id_images"
+          >Select Room Images</label
+        >
+      </div>
+    </div>
+    <div class="button-group">
+      <button
+        type="button"
+        class="btn btn-success mb-3"
+        id="add-more-files-btn"
+      >
+        <i class="fa fa-plus"></i> Add more images
+      </button>
+    </div>
+    <div class="button-group">
+      <button type="submit" class="btn btn-primary submit-button">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document
+      .getElementById("add-more-files-btn")
+      .addEventListener("click", function () {
+        var container = document.getElementById("file-inputs-container");
+        var newInputWrapper = document.createElement("div");
+        newInputWrapper.classList.add("custom-file", "form-group");
+
+        var newInput = document.createElement("input");
+        newInput.type = "file";
+        newInput.name = "images";
+        newInput.classList.add("custom-file-input");
+
+        var newLabel = document.createElement("label");
+        newLabel.classList.add("custom-file-label");
+        newLabel.innerText = "Select Room Images";
+        newLabel.setAttribute("for", newInput.id);
+
+        newInputWrapper.appendChild(newInput);
+        newInputWrapper.appendChild(newLabel);
+        container.appendChild(newInputWrapper);
+
+        newInput.addEventListener("change", function () {
+          var fileName =
+            newInput.files.length > 1
+              ? `${newInput.files.length} files selected`
+              : newInput.files[0].name;
+          newLabel.innerText = fileName;
+        });
+      });
+
+    // Update existing input's label
+    var existingInput = document.getElementById("id_images");
+    var existingLabel = existingInput.nextElementSibling;
+
+    existingInput.addEventListener("change", function () {
+      var fileName =
+        existingInput.files.length > 1
+          ? `${existingInput.files.length} files selected`
+          : existingInput.files[0].name;
+      existingLabel.innerText = fileName;
+    });
+  });
+</script>
+
+<style>
+  .add-room-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+    margin-top:0;
+  }
+
+  .custom-file-input {
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    .add-room-form {
+      padding: 0 5px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      margin-bottom: 0.5rem;
+    }
+  }
+</style>
+{% endblock %}
