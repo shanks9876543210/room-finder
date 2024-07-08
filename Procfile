@@ -1,1 +1,1 @@
-web gunicorn room_finder.wsgi --log-file -
+web: gunicorn room_finder.wsgi --log-file -
