@@ -92,7 +92,7 @@ class RoomUpdateView(UpdateView):
     model = Room
     form_class = RoomForm
     template_name = 'room_form.html'
-    success_url = '/'
+    success_url = '/room/list/'
 
     def form_valid(self, form):
         room = form.save()
