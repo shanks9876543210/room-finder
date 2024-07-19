@@ -1,3 +1,18 @@
-# Default ignored files
-/shelf/
-/workspace.xml
+# Remove the conflicting .pyc file
+rm room_finder/__pycache__/settings.cpython-312.pyc
+
+# Add __pycache__ to .gitignore if not already present
+echo "__pycache__/" >> .gitignore
+git add .gitignore
+git rm --cached room_finder/__pycache__/settings.cpython-312.pyc
+
+# Resolve conflict in db.sqlite3
+# Choose one of the following commands based on your decision
+git checkout --ours db.sqlite3   # or
+# git checkout --theirs db.sqlite3
+
+# Stage the resolved db.sqlite3 file
+git add db.sqlite3
+
+# Commit the merge
+git commit
