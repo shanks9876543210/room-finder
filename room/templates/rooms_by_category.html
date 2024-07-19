@@ -3,14 +3,74 @@
 <head>
     <title>Rooms by Category</title>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .room-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .room-item {
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
+            text-align: left;
+        }
+
+        .room-item h2 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #007bff;
+        }
+
+        .room-item h2 a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .room-item h2 a:hover {
+            text-decoration: underline;
+        }
+
+        .room-item p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .room-item p:last-child {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <div class="form-container">
         <h1>Rooms in Category: {{ category.name }}</h1>
-        <ul>
+        <ul class="room-list">
             {% for room in rooms %}
-            <li>
+            <li class="room-item">
                 <h2><a href="{% url 'room_detail' room.pk %}">{{ room.title }}</a></h2>
                 <p>{{ room.description }}</p>
                 <p>Location: {{ room.location.name }}</p>

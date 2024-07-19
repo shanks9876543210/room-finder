@@ -3,12 +3,65 @@
 {% block title %}Add Category{% endblock %}
 
 {% block content %}
-<h1 style="text-align: center;">Add Category</h1>
-<div class="form-container">
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">Add Category</button>
-    </form>
+<div class="container mt-5 data-entry-container">
+  <h1 class="text-center mb-4">Add Category</h1>
+  <form method="post" class="add-category-form">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="id_name">Name:</label>
+      {{ form.name }}
+    </div>
+    <div class="form-group">
+      <label for="id_description">Description:</label>
+      {{ form.description }}
+    </div>
+    <button type="submit" class="btn btn-primary submit-button">Add Category</button>
+  </form>
 </div>
+
+<style>
+  .add-category-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    margin-bottom: 0.5rem;
+    display: block; /* Ensure label is on top of the input */
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+
+  @media (max-width: 768px) {
+    .add-category-form {
+      padding: 0 5px;
+    }
+  }
+</style>
 {% endblock %}
