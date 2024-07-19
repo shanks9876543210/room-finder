@@ -4,9 +4,17 @@
 
 {% block content %}
 <style>
+    .contact-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items horizontally */
+        margin-top: 0; /* Adjust this value for vertical positioning */
+        margin-left: 350px; /* Move to the right */
+    }
+
     .contact-info {
         max-width: 600px;
-        margin: 0 auto;
+        margin: 20px; /* Margin for spacing */
         background-color: #fff;
         padding: 20px;
         border-radius: 5px;
@@ -28,18 +36,32 @@
         text-decoration: underline;
     }
 
+    h1 {
+        text-align: center; /* Center the heading */
+        color: #333; /* Match base.html style */
+        margin-bottom: 20px; /* Space below the heading */
+    }
+
     /* Media query for responsiveness */
     @media (max-width: 768px) {
+        .contact-container {
+            margin-left: 0; /* Reset margin for smaller screens */
+            align-items: center; /* Ensure items are centered */
+        }
+
         .contact-info {
             padding: 10px;
+            width: 90%; /* Full width for smaller screens */
         }
     }
 </style>
 
-<h1>Contact Us</h1>
-<div class="contact-info">
-    <p>If you want to rent your room, please do reach out to us:</p>
-    <p>Email: <a href="mailto:owner@example.com">raibinay421@gmail.com</a></p>
-    <p>Phone: <a href="tel:+1234567890">9818207179,9768400312</a></p>
+<div class="contact-container">
+    <h1>Contact Us</h1>
+    <div class="contact-info">
+        <p>If you want to rent your room, please do reach out to us:</p>
+        <p>Email: <a href="mailto:owner@example.com">raibinay421@gmail.com</a></p>
+        <p>Phone: <a href="tel:+1234567890">9818207179, 9768400312</a></p>
+    </div>
 </div>
 {% endblock %}

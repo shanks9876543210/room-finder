@@ -85,7 +85,7 @@ h1 {
 /* Card design for room list */
 .room-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid with minimum item width of 250px */
+    grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
     gap: 20px;
     max-width: 1200px; /* Limit the width of the room list */
     margin: 20px auto; /* Center the room list container */
