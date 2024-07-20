@@ -1,23 +1,149 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Rooms by Location</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-</head>
-<body>
-    <div class="form-container">
-        <h1>Rooms in Location: {{ location.name }}</h1>
-        <ul>
-            {% for room in rooms %}
-            <li>
-                <h2><a href="{% url 'room_detail' room.pk %}">{{ room.title }}</a></h2>
+{% extends 'base.html' %}
+
+{% block title %}Rooms by Location{% endblock %}
+
+{% block content %}
+
+
+<div class="form-container">
+    <h1>Rooms in Location: {{ location.name }}</h1>
+    <ul class="room-list">
+        {% for room in rooms %}
+        <li class="room-item">
+            <a href="{% url 'room_detail' room.pk %}" class="room-link">
+              {% with room.images.all as images %}
+                {% if images %}
+                  <img src="{{ images.0.image.url }}" alt="Room Image" class="room-image">
+                {% else %}
+                  <div class="no-image">
+                    <h2>No images</h2>
+                  </div>
+                {% endif %}
+              {% endwith %}
+              <div class="room-info">
+                <h2>{{ room.title }}</h2>
                 <p>{{ room.description }}</p>
-                <p>Category: {{ room.category.name }}</p>
+                <p>Location: {{ room.location.name }}</p>
                 <p>Price per month: ${{ room.price_per_month }}</p>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-</body>
-</html>
+              </div>
+            </a>
+        </li>
+        {% empty %}
+        <p>No rooms available for this location.</p>
+        {% endfor %}
+    </ul>
+</div>
+
+<style>
+  /* Navbar Styling */
+  .navbar {
+    background-color: #007bff;
+    padding: 10px 20px;
+    color: #fff;
+  }
+
+  .navbar-brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-logo {
+    height: 40px;
+  }
+
+  .navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+  }
+
+  .nav-item {
+    display: inline;
+  }
+
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+
+  .nav-link:hover {
+    background-color: #0056b3;
+  }
+
+  /* Form Container Styling */
+  .form-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .room-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .room-item {
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+    display: flex;
+    gap: 20px;
+  }
+
+  .room-item .room-image {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .room-item .no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 100px;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+  }
+
+  .room-item .room-info {
+    flex: 1;
+  }
+
+  .room-item h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #007bff;
+  }
+
+  .room-item h2 a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .room-item h2 a:hover {
+    text-decoration: underline;
+  }
+
+  .room-item p {
+    margin: 5px 0;
+    color: #666;
+  }
+
+  .room-item p:last-child {
+    font-weight: bold;
+    color: #333;
+  }
+</style>
+{% endblock %}

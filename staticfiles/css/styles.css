@@ -144,4 +144,44 @@ h1 {
 .form-container form > * {
     margin-bottom: 10px;
 }
-s
+
+/* Dropdown menu customization */
+.dropdown-menu {
+    background-color: #343a40; /* Dark background color for dropdown */
+}
+
+.dropdown-item {
+    color: #ffffff; /* White text color for dropdown items */
+}
+
+.dropdown-item:hover {
+    background-color: #454d55; /* Darker background color on hover */
+}
+/* styles.css */
+
+.container {
+    max-width: 900px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    border-radius: 0.25rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}

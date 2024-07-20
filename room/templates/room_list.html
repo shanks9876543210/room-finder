@@ -3,26 +3,96 @@
 {% block title %}Available Rooms{% endblock %}
 
 {% block content %}
-<h1 style="text-align: center;">Available Rooms</h1>
+<h1 class="text-center">Available Rooms</h1>
 <div class="room-list">
     {% for room in rooms %}
     <a href="{% url 'room_detail' room.pk %}" class="room-card">
         {% with room.images.all as images %}
             {% if images %}
-                <img src="{{ images.0.image.url }}" alt="Room Image">
+                <img src="{{ images.0.image.url }}" alt="Room Image" class="room-image">
             {% else %}
-                <h1>No images</h1>
+                <div class="no-image">
+                    <h2>No images</h2>
+                </div>
             {% endif %}
         {% endwith %}
         <div class="room-card-content">
-            <h2>{{ room.title }}</h2>
-            <p>{{ room.description|truncatewords:20 }}</p>
-            <p>Location: {{ room.location.name }}</p>
-            <p>Category: {{ room.category.name }}</p>
-            <p class="price">Price per month: ${{ room.price_per_month }}</p>
-            <p class="availability">{% if room.availability %}Available{% else %}Not Available{% endif %}</p>
+            <h2 class="room-title">{{ room.title }}</h2>
+            <p class="room-description">{{ room.description|truncatewords:20 }}</p>
+            <p class="room-location">Location: {{ room.location.name }}</p>
+            <p class="room-category">Category: {{ room.category.name }}</p>
+            <p class="room-price">Price per month: ${{ room.price_per_month }}</p>
+            <p class="room-availability">{% if room.availability %}Available{% else %}Not Available{% endif %}</p>
         </div>
     </a>
     {% endfor %}
 </div>
+
+<style>
+  .text-center {
+    text-align: center;
+  }
+
+  .room-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .room-card {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .room-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .room-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .no-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    background: #f4f4f4;
+  }
+
+  .room-card-content {
+    padding: 15px;
+  }
+
+  .room-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .room-description {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .room-location,
+  .room-category,
+  .room-price,
+  .room-availability {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+  }
+</style>
 {% endblock %}
